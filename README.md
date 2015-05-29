@@ -22,7 +22,7 @@ Then you have to run `composer update` to install the package. Once this is comp
 
 ## Support
 
-Bugs and feature requests are tracked on [GitHub](https://github.com/markusjwetzel/laravel-data-mapper/issues).
+Bugs and feature requests are tracked on [GitHub](https://github.com/markusjwetzel/eloquent-versioning/issues).
 
 ## License
 

@@ -1,5 +1,7 @@
 # Eloquent Versioning
 
+[![Latest Stable Version](https://poser.pugx.org/markusjwetzel/eloquent-versioning/v/stable)](https://packagist.org/packages/markusjwetzel/eloquent-versioning) [![Total Downloads](https://poser.pugx.org/markusjwetzel/eloquent-versioning/downloads)](https://packagist.org/packages/markusjwetzel/eloquent-versioning) [![Latest Unstable Version](https://poser.pugx.org/markusjwetzel/eloquent-versioning/v/unstable)](https://packagist.org/packages/markusjwetzel/eloquent-versioning) [![License](https://poser.pugx.org/markusjwetzel/eloquent-versioning/license)](https://packagist.org/packages/markusjwetzel/eloquent-versioning)
+
 An extension for the Eloquent ORM to support versioning.
 
 ## Installation

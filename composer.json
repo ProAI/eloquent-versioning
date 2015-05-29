@@ -1,7 +1,7 @@
 {
     "name": "markusjwetzel/laravel-versioning",
     "description": "An extension for the Eloquent ORM to support versioning.",
-    "keywords": ["laravel","orm","eloquent","revision","version","versioned","versioning", "audit"],
+    "keywords": ["laravel","orm","eloquent","revision","version","versioned","versioning","audit"],
     "homepage": "http://github.com/markusjwetzel/laravel-versioning",
     "license": "MIT",
     "authors": [

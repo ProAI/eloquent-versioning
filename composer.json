@@ -1,8 +1,8 @@
 {
-    "name": "markusjwetzel/eloquent-versioning",
+    "name": "proai/eloquent-versioning",
     "description": "An extension for the Eloquent ORM to support versioning.",
     "keywords": ["laravel","orm","eloquent","revision","version","versioned","versioning","audit"],
-    "homepage": "http://github.com/markusjwetzel/eloquent-versioning",
+    "homepage": "http://github.com/ProAI/eloquent-versioning",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Wetzel\\Versioning\\": "src/"
+            "ProAI\\Versioning\\": "src/"
         }
     },
     "extra": {

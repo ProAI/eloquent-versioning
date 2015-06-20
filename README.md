@@ -86,7 +86,7 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 If you want to get a specific version, you have to add `version(NUMBER_OF_VERSION)` (e. g. `User::version(2)->find(1)` will return version #2 of user #1).
 
-If you want to get all versions of an item, you can use `getAllVersions()` or `findAllVersions(ID)`, which are basically extensions of the `get()` and `find()` method (e. g. `User::findAllVersions(1)` will return all versions of user #1).
+If you want to get all versions of an item, you can use `getAllVersions()` or `findAllVersions(ID)`, which are basically extensions of the `get()` and `find(ID)` method (e. g. `User::findAllVersions(1)` will return all versions of user #1).
 
 #### Create, update and delete
 

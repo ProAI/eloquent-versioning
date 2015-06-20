@@ -80,7 +80,7 @@ You have to define a `$versioned` array in your model that contains all versione
 
 ### Queries
 
-#### Get data from database
+#### Get versions from database
 
 By default the query builder will fetch the latest version (e. g. `User::find(1);` will return the latest version of user #1).
 

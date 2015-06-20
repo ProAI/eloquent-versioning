@@ -82,11 +82,13 @@ You have to define a `$versioned` array in your model that contains all versione
 
 #### Get versions from database
 
-By default the query builder will fetch the latest version (e. g. `User::find(1);` will return the latest version of user #1).
+By default the query builder will fetch the latest version (e. g. `User::find(1);` will return the latest version of user #1). If you want a specific version or all versions, you can use the following:
 
-If you want to get a specific version, you have to add `version(NUMBER_OF_VERSION)` (e. g. `User::version(2)->find(1)` will return version #2 of user #1).
+* `version(NUMBER_OF_VERSION)` returns a specific version<br>Example: `User::version(2)->find(1)` will return version #2 of user #1
 
-If you want to get all versions of an item, you can use `getAllVersions()` or `findAllVersions(ID)`, which are basically extensions of the `get()` and `find(ID)` method (e. g. `User::findAllVersions(1)` will return all versions of user #1).
+* `getAllVersions()` returns all versions of the queried items<br>Example: `User::getAllVersions()` will return all versions of all users
+
+* `findAllVersions(ID)` returns all versions of an item<br>Example: `User::findAllVersions(1)` will return all versions of user #1
 
 #### Create, update and delete
 

@@ -18,7 +18,7 @@ Then you have to run `composer update` to install the package.
 
 ## Example
 
-We assume that we want a simple user model. While the username should be fixed, the email and city should be versionable. The migrations would look like the following:
+We assume that we want a simple user model. While the username should be fixed, the email and city should be versionable. Also timestamps and soft deletes should be versioned. The migrations would look like the following:
 
 ```php
 ...

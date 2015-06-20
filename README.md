@@ -132,13 +132,13 @@ trait Versionable
 
 Obviously you have to replace `MyVersioningBuilder` by the classname of your custom builder. In addition you have to make sure that your custom builder implements the functionality of the versioning query builder. There are some strategies to do this:
 
-* Extend the versioning query builder `ProAi\Versioning\Builder`
-* Use the versioning builder trait `ProAi\Versioning\BuilderTrait`
+* Extend the versioning query builder `ProAI\Versioning\Builder`
+* Use the versioning builder trait `ProAI\Versioning\BuilderTrait`
 * Copy and paste the code from the versioning query builder to your custom builder
 
 ## Support
 
-Bugs and feature requests are tracked on [GitHub](https://github.com/markusjwetzel/eloquent-versioning/issues).
+Bugs and feature requests are tracked on [GitHub](https://github.com/proai/eloquent-versioning/issues).
 
 ## License
 

@@ -22,7 +22,31 @@ Then you have to run `composer update` to install the package. Once this is comp
 
 ## Usage
 
+## Customize Query Builder
 
+If you want to use a custom versioning query builder, you will have to build your own versioning trait, but that's pretty easy:
+
+```php
+<?php
+
+namespace Acme\Versioning;
+
+trait Versionable
+{
+    use \ProAI\Versioning\BaseVersionable;
+    
+    public function newEloquentBuilder($query)
+    {
+        return new MyBuilder($query);
+    }
+}
+```
+
+Obviously you have to replace `MyBuilder` by the classname of your custom builder. In addition you have to make sure that your custom builder implements the functionality of the versioning query builder. There are some strategies to do this:
+
+* Extend the versioning query builder `ProAi\Versioning\Builder`
+* Use the versioning builder trait `ProAi\Versioning\BuilderTrait`
+* Copy and paste the code from the versioning query builder to your custom builder
 
 ## Support
 

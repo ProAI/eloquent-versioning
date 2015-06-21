@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ScopeInterface;
 use Illuminate\Database\Query\JoinClause;
 
-class VersioningScope implements ScopeInterface {
-
+class VersioningScope implements ScopeInterface
+{
     /**
      * All of the extensions to be added to the builder.
      *
      * @var array
      */
-    protected $extensions = ['Version', 'GetAllVersions', 'FindAllVersions'];
+    protected $extensions = ['Version', 'AllVersions'];
 
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -89,14 +89,14 @@ class VersioningScope implements ScopeInterface {
     }
 
     /**
-     * Add the version extension to the builder.
+     * Add the allVersions extension to the builder.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    protected function addGetAllVersions(Builder $builder)
+    protected function addAllVersions(Builder $builder)
     {
-        $builder->macro('getAllVersions', function(Builder $builder) {
+        $builder->macro('allVersions', function(Builder $builder) {
             $model = $builder->getModel();
 
             $this->remove($builder, $builder->getModel());
@@ -105,30 +105,7 @@ class VersioningScope implements ScopeInterface {
                 $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
             });
 
-            return $builder->get();
-        });
-    }
-
-    /**
-     * Add the version extension to the builder.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @return void
-     */
-    protected function addFindAllVersions(Builder $builder)
-    {
-        $builder->macro('findAllVersions', function(Builder $builder, $id) {
-            $model = $builder->getModel();
-
-            $this->remove($builder, $builder->getModel());
-
-            $builder->getQuery()->where($model->getQualifiedKeyName(), '=', $id);
-
-            $builder->join($model->getVersionTable(), function($join) use ($model) {
-                $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
-            });
-
-            return $builder->get();
+            return $builder;
         });
     }
 

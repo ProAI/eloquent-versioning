@@ -86,9 +86,7 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 * `version(NUMBER_OF_VERSION)` returns a specific version<br>Example: `User::version(2)->find(1)` will return version #2 of user #1
 
-* `getAllVersions()` returns all versions of the queried items<br>Example: `User::getAllVersions()` will return all versions of all users
-
-* `findAllVersions(ID)` returns all versions of an item<br>Example: `User::findAllVersions(1)` will return all versions of user #1
+* `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 
 #### Create, update and delete
 

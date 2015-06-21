@@ -63,7 +63,7 @@ class User extends \Illuminate\Database\Eloquent\Model
 
 ## Usage
 
-### Tables
+### Database Tables
 
 You need to add the following columns to your main model table:
 
@@ -74,13 +74,13 @@ Furthermore you need a version table. The name of the version table is identical
 * `ref_` followed by the name of the model's primary key (if the primary key is `id`, the column name will be `ref_id`)
 * `version` (integer)
 
-### Models
+### Eloquent Models
 
 You have to define a `$versioned` array in your model that contains all versioned columns.
 
-### Queries
+### Database Queries
 
-#### Get versions from database
+#### Query the database
 
 By default the query builder will fetch the latest version (e. g. `User::find(1);` will return the latest version of user #1). If you want a specific version or all versions, you can use the following:
 
@@ -88,9 +88,9 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 * `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 
-#### Create, update and delete
+#### Create, update and delete records
 
-All these operations can be performed normally. The package will automatically generate new versions and will remove all versions on delete.
+All these operations can be performed normally. The package will automatically generate a version 1 on create, the next version on update and will remove all versions on delete.
 
 ### Timestamps
 

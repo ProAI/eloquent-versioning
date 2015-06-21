@@ -84,9 +84,9 @@ trait BuilderTrait {
         $affectedRecords = $this->getAffectedRecords();
 
         // update main table records
-        /*if (! $this->query->increment($this->model->getLatestVersionColumn(), 1, $values)) {
+        if (! $this->query->increment($this->model->getLatestVersionColumn(), 1, $values)) {
             return false;
-        }*/
+        }
 
         // update all versions in case primary key value has been changed
         $db = $this->model->getConnection();
@@ -97,7 +97,7 @@ trait BuilderTrait {
                 return false;
             }
         }
-        dd($affectedRecords);
+
         // update version table records
         foreach ($affectedRecords as $record) {
             // get versioned values from record

@@ -2,8 +2,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/proai/eloquent-versioning/v/stable)](https://packagist.org/packages/proai/eloquent-versioning) [![Total Downloads](https://poser.pugx.org/proai/eloquent-versioning/downloads)](https://packagist.org/packages/proai/eloquent-versioning) [![Latest Unstable Version](https://poser.pugx.org/proai/eloquent-versioning/v/unstable)](https://packagist.org/packages/proai/eloquent-versioning) [![License](https://poser.pugx.org/proai/eloquent-versioning/license)](https://packagist.org/packages/proai/eloquent-versioning)
 
-**Important: This is an alpha version. So it might be that not everything works out of the box. You are welcome to report bugs.**
-
 This is an extension for the Eloquent ORM to support versioning. You can specify attributes as versioned. If an attribute is specified as versioned the value will be saved in a separate version table on each update. It is possible to use timestamps and soft deletes with this feature.
 
 ## Installation

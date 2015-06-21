@@ -1,6 +1,6 @@
 <?php
 
-namespace Wetzel\Datamapper\Versioning;
+namespace ProAI\Versioning;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

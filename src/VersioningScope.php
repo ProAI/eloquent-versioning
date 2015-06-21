@@ -1,6 +1,6 @@
 <?php
 
-namespace Wetzel\Datamapper\Versioning;
+namespace ProAI\Versioning;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -64,39 +64,6 @@ class VersioningScope implements ScopeInterface {
         {
             $this->{"add{$extension}"}($builder);
         }
-
-        $builder->onDelete(function(Builder $builder)
-        {
-            $this->remove($builder, $builder->getModel());
-
-            $model = $builder->getModel();
-
-            $db = $model->getConnection();
-
-            // assume that we are in a model context if model exists == true
-            if ($model->exists) {
-                $ids = [$model->getKey()];
-            }
-
-            // assume that we are in a query instance context if model exists == false
-            else {
-                // get rows that should be deleted
-                $results = $builder->getQuery()->get();
-
-                $ids = [];
-                foreach($results as $record) {
-                    $ids[] = $record->{$model->getKeyName()};
-                }
-            }
-
-            // delete version table records
-            $db->table($model->getVersionTable())
-                ->whereIn($model->getVersionKeyName(), $ids)
-                ->delete();
-
-            // delete main table record
-            return $builder->getQuery()->delete();
-        });
     }
 
     /**

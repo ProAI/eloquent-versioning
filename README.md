@@ -84,7 +84,7 @@ You have to define a `$versioned` array in your model that contains all versione
 
 By default the query builder will fetch the latest version (e. g. `User::find(1);` will return the latest version of user #1). If you want a specific version or all versions, you can use the following:
 
-* `version(NUMBER_OF_VERSION)` returns a specific version<br>Example: `User::version(2)->find(1)` will return version #2 of user #1
+* `version(VERSION_NO)` returns a specific version<br>Example: `User::version(2)->find(1)` will return version #2 of user #1
 
 * `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 

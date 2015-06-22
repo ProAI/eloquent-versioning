@@ -7,6 +7,29 @@ use Exception;
 trait BuilderTrait
 {
     /**
+     * Get the hydrated models without eager loading.
+     *
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Model[]
+     */
+    public function getModels($columns = array('*'))
+    {
+        // make sure that we select the version table, if the main table is selected
+        $tempColumns = isset($this->query->columns)
+            ? array_merge($columns, $this->query->columns)
+            : $columns;
+        foreach($tempColumns as $column) {
+            $segments = explode('.', $column);
+            if ($segments[0] == $this->model->getTable()) {
+                $this->query->addSelect($this->model->getVersionTable().'.*');
+                break;
+            }
+        }
+
+        return parent::getModels($columns);
+    }
+
+    /**
      * Insert a new record into the database.
      *
      * @param  array  $values
@@ -227,18 +250,18 @@ trait BuilderTrait
      */
     protected function isVersionedKey($key, array $versionedKeys)
     {
-        $keyFractions = explode(".",$key);
+        $segments = explode(".",$key);
 
-        if (count($keyFractions) > 2) {
+        if (count($segments) > 2) {
             throw new Exception("Key '".$key."' has too many fractions.");
         }
 
-        if (count($keyFractions) == 1 && in_array($keyFractions[0], $versionedKeys)) {
-            return $keyFractions[0];
+        if (count($segments) == 1 && in_array($segments[0], $versionedKeys)) {
+            return $segments[0];
         }
 
-        if (count($keyFractions) == 2 && $keyFractions[0] == $this->model->getVersionTable() && in_array($keyFractions[1], $versionedKeys)) {
-            return $keyFractions[1];
+        if (count($segments) == 2 && $segments[0] == $this->model->getVersionTable() && in_array($segments[1], $versionedKeys)) {
+            return $segments[1];
         }
 
         return null;

@@ -5,7 +5,7 @@ namespace ProAI\Versioning;
 trait Versionable
 {
     /**
-     * Boot the soft deleting trait for a model.
+     * Boot the versionable trait for a model.
      *
      * @return void
      */

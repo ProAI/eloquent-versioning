@@ -65,7 +65,7 @@ class User extends \Illuminate\Database\Eloquent\Model
 
 You need to add the following columns to your main model table:
 
-* `last_version` (integer).
+* `latest_version` (integer).
 
 Furthermore you need a version table. The name of the version table is identical with the name of the main model table (e. g. for a model table `users` the name would be `users_version`). This table must contain the following columns:
 

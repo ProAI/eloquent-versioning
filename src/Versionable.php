@@ -87,7 +87,7 @@ trait Versionable
      */
     public function getLatestVersionColumn()
     {
-        return defined('static::VERSION') ? static::LATEST_VERSION : 'latest_version';
+        return defined('static::LATEST_VERSION') ? static::LATEST_VERSION : 'latest_version';
     }
 
     /**

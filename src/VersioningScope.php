@@ -4,10 +4,10 @@ namespace ProAI\Versioning;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ScopeInterface;
+use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\JoinClause;
 
-class VersioningScope implements ScopeInterface
+class VersioningScope implements Scope
 {
     /**
      * All of the extensions to be added to the builder.

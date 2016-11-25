@@ -9,7 +9,7 @@ This is an extension for the Eloquent ORM to support versioning. You can specify
 Eloquent Versioning is distributed as a composer package. So you first have to add the package to your `composer.json` file:
 
 ```
-"proai/eloquent-versioning": "~1.0@dev"
+"proai/eloquent-versioning": "~1.0"
 ```
 
 Then you have to run `composer update` to install the package.

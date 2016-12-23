@@ -47,9 +47,13 @@ The referring Eloquent model should include the code below:
 
 namespace Acme\Models;
 
-class User extends \Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Model;
+use ProAI\Versioning\Versionable;
+use ProAI\Versioning\SoftDeletes;
+
+class User extends Model
 {
-    use \ProAI\Versioning\Versionable, \ProAI\Versioning\SoftDeletes;
+    use Versionable, SoftDeletes;
     
     $timestamps = true;
     

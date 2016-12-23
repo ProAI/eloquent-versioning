@@ -159,7 +159,7 @@ trait BuilderTrait
     public function forceDelete()
     {
         // get records
-        $affectedRecords = $this->getAffectedRecords();
+        $affectedRecords = $this->getAffectedRecords()->toArray();
         $ids = array_map(function($record) {
             return $record->{$this->model->getKeyName()};
         }, $affectedRecords);

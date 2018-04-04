@@ -55,9 +55,9 @@ class User extends Model
 {
     use Versionable, SoftDeletes;
     
-    $timestamps = true;
+    public $timestamps = true;
     
-    $versioned = ['email', 'city', 'updated_at', 'deleted_at'];
+    public $versioned = ['email', 'city', 'updated_at', 'deleted_at'];
     
     ...
 }

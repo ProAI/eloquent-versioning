@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Query\JoinClause;
+use Carbon\Carbon;
 
 class VersioningScope implements Scope
 {
@@ -14,7 +15,7 @@ class VersioningScope implements Scope
      *
      * @var array
      */
-    protected $extensions = ['Version', 'AllVersions'];
+    protected $extensions = ['Version', 'AllVersions', 'Moment'];
 
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -106,6 +107,28 @@ class VersioningScope implements Scope
             $builder->join($model->getVersionTable(), function($join) use ($model) {
                 $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
             });
+
+            return $builder;
+        });
+    }
+
+    /**
+     * Add the moment extension to the builder.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
+     * @return void
+     */
+    protected function addMoment(Builder $builder)
+    {
+        $builder->macro('moment', function(Builder $builder, Carbon $moment) {
+            $model = $builder->getModel();
+
+            $this->remove($builder, $builder->getModel());
+
+            $builder->join($model->getVersionTable(), function($join) use ($model, $moment) {
+                $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
+                $join->where('updated_at', '<=', $moment)->orderBy('updated_at', 'desc')->limit(1);
+            })->orderBy('updated_at', 'desc')->limit(1);
 
             return $builder;
         });

@@ -87,6 +87,9 @@ trait BuilderTrait
             return false;
         }
 
+        // fill the latest version value
+        $this->model->{$this->model->getLatestVersionColumn()} = 1;
+
         return $id;
     }
 
@@ -126,7 +129,7 @@ trait BuilderTrait
 
             // set version and ref_id
             $recordVersionValues[$this->model->getVersionKeyName()] = $record->{$this->model->getKeyName()};
-            $recordVersionValues[$this->model->getVersionColumn()] = $record->{$this->model->getVersionColumn()}+1;
+            $recordVersionValues[$this->model->getVersionColumn()] = $record->{$this->model->getLatestVersionColumn()}+1;
 
             // insert new version
             if(! $db->table($this->model->getVersionTable())->insert($recordVersionValues)) {

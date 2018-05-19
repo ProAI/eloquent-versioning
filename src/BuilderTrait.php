@@ -43,13 +43,14 @@ trait BuilderTrait
 
         // set version, ref_id and latest_version
         $values[$this->model->getLatestVersionColumn()] = 1;
-        $versionValues[$this->model->getVersionKeyName()] = $this->model->getKey();
-        $versionValues[$this->model->getVersionColumn()] = 1;
 
         // insert main table record
-        if (! $this->query->insert($values)) {
+        if (! $id = $this->query->insertGetId($values)) {
             return false;
         }
+
+        $versionValues[$this->model->getVersionKeyName()] = $id;
+        $versionValues[$this->model->getVersionColumn()] = 1;
 
         // insert version table record
         $db = $this->model->getConnection();
@@ -136,6 +137,9 @@ trait BuilderTrait
                 return false;
             }
         }
+
+        // fill the latest version value
+        $this->model->{$this->model->getLatestVersionColumn()} += 1;
 
         return true;
     }

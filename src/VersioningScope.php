@@ -25,10 +25,12 @@ class VersioningScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->join($model->getVersionTable(), function($join) use ($model) {
-            $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
-            $join->on($model->getQualifiedVersionColumn(), '=', $model->getQualifiedLatestVersionColumn());
-        });
+        if (!$this->hasVersionJoin($builder, $model->getVersionTable())) {
+            $builder->join($model->getVersionTable(), function($join) use ($model) {
+                $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
+                $join->on($model->getQualifiedVersionColumn(), '=', $model->getQualifiedLatestVersionColumn());
+            });
+        }
 
         $this->extend($builder);
     }
@@ -121,4 +123,15 @@ class VersioningScope implements Scope
         return $join->type == 'inner' && $join->table == $table;
     }
 
+    /**
+     * Determine if the given builder contains a join with the given table
+     *
+     * @param Builder $builder
+     * @param string $table
+     * @return bool
+     */
+    protected function hasVersionJoin(Builder $builder, string $table)
+    {
+        return collect($builder->getQuery()->joins)->pluck('table')->contains($table);
+    }
 }

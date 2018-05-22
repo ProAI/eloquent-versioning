@@ -4,6 +4,7 @@ namespace ProAI\Versioning\Tests;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use ProAI\Versioning\Tests\Models\Post;
 use ProAI\Versioning\Tests\Models\User;
 
 class BuilderTest extends TestCase
@@ -144,5 +145,73 @@ class BuilderTest extends TestCase
         $this->assertArraySubset([
             'version' => 3
         ], User::moment($date->copy()->addDays(2))->find($model->id)->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function itWillRemovePreviousJoins()
+    {
+        /** @var User $model */
+        $model = factory(User::class)->create([]);
+        $city = $model->city;
+
+        $model->update([
+            'city'  => 'Citadel'
+        ]);
+
+        $builder = User::version(1);
+
+        // It should have one join right now
+        $this->assertEquals(1, collect($builder->getQuery()->joins)->where('table', '=', 'users_version')->count());
+
+        $builder->version(2);
+
+        // It should still have one join right now
+        $this->assertEquals(1, collect($builder->getQuery()->joins)->where('table', '=', 'users_version')->count());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider modelProvider
+     * @param string $model
+     */
+    public function itWillDeleteTheVersionedTable(string $model)
+    {
+        factory($model)->create([]);
+        factory($model)->create([]);
+
+        $model::version(1)->delete();
+
+        $this->assertEquals(0, User::all()->count());
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider modelProvider
+     * @param string $model
+     */
+    public function itWillForceDeleteTheVersionedTable(string $model)
+    {
+        factory($model)->create([]);
+        factory($model)->create([]);
+
+        $model::version(1)->forceDelete();
+
+        $this->assertEquals(0, User::all()->count());
+    }
+
+    public function modelProvider()
+    {
+        return [
+            [
+                User::class
+            ],
+            [
+                Post::class
+            ]
+        ];
     }
 }

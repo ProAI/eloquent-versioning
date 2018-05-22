@@ -23,5 +23,4 @@ trait SoftDeletes
 
         return $this->getTable().'.'.$deletedAt;
     }
-
 }

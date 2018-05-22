@@ -9,7 +9,8 @@
         "version",
         "versioned",
         "versioning",
-        "audit"
+        "audit",
+        "audits"
     ],
     "homepage": "http://github.com/ProAI/eloquent-versioning",
     "license": "MIT",

@@ -90,6 +90,8 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 * `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 
+* `moment(Carbon)` returns a specific version, closest but lower than the input date<br>Example: `User::moment(Carbon::now()->subWeek()->find(1)` will return the version at that point in time.
+
 #### Create, update and delete records
 
 All these operations can be performed normally. The package will automatically generate a version 1 on create, the next version on update and will remove all versions on delete.

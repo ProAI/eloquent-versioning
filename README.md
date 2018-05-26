@@ -29,12 +29,14 @@ Schema::create('users', function(Blueprint $table) {
 });
 
 Schema::create('users_version', function(Blueprint $table) {
-    $table->integer('ref_id')->primary();
-    $table->integer('version')->primary();
+    $table->integer('ref_id')->unsigned();
+    $table->integer('version')->unsigned();
     $table->string('email');
     $table->string('city');
     $table->timestamp('updated_at');
     $table->timestamp('deleted_at');
+    
+    $table->primary(['ref_id', 'version']);
 });
 
 ...
@@ -90,7 +92,7 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 * `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 
-* `moment(Carbon)` returns a specific version, closest but lower than the input date<br>Example: `User::moment(Carbon::now()->subWeek()->find(1)` will return the version at that point in time.
+* `moment(Carbon)` returns a specific version, closest but lower than the input date<br>Example: `User::moment(Carbon::now()->subWeek())->find(1)` will return the version at that point in time.
 
 #### Create, update and delete records
 

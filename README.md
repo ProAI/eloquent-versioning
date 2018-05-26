@@ -1,6 +1,6 @@
 # Eloquent Versioning
 
-[![Latest Stable Version](https://poser.pugx.org/proai/eloquent-versioning/v/stable)](https://packagist.org/packages/proai/eloquent-versioning) [![Total Downloads](https://poser.pugx.org/proai/eloquent-versioning/downloads)](https://packagist.org/packages/proai/eloquent-versioning) [![Latest Unstable Version](https://poser.pugx.org/proai/eloquent-versioning/v/unstable)](https://packagist.org/packages/proai/eloquent-versioning) [![License](https://poser.pugx.org/proai/eloquent-versioning/license)](https://packagist.org/packages/proai/eloquent-versioning)
+[![Build status](https://scrutinizer-ci.com/g/ProAI/eloquent-versioning/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ProAI/eloquent-versioning/) [![Quality score](https://scrutinizer-ci.com/g/ProAI/eloquent-versioning/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ProAI/eloquent-versioning/) [![Latest Stable Version](https://poser.pugx.org/proai/eloquent-versioning/v/stable)](https://packagist.org/packages/proai/eloquent-versioning) [![Total Downloads](https://poser.pugx.org/proai/eloquent-versioning/downloads)](https://packagist.org/packages/proai/eloquent-versioning) [![Latest Unstable Version](https://poser.pugx.org/proai/eloquent-versioning/v/unstable)](https://packagist.org/packages/proai/eloquent-versioning) [![License](https://poser.pugx.org/proai/eloquent-versioning/license)](https://packagist.org/packages/proai/eloquent-versioning)
 
 This is an extension for the Eloquent ORM to support versioning. You can specify attributes as versioned. If an attribute is specified as versioned the value will be saved in a separate version table on each update. It is possible to use timestamps and soft deletes with this feature.
 
@@ -29,12 +29,14 @@ Schema::create('users', function(Blueprint $table) {
 });
 
 Schema::create('users_version', function(Blueprint $table) {
-    $table->integer('ref_id')->primary();
-    $table->integer('version')->primary();
+    $table->integer('ref_id')->unsigned();
+    $table->integer('version')->unsigned();
     $table->string('email');
     $table->string('city');
     $table->timestamp('updated_at');
     $table->timestamp('deleted_at');
+    
+    $table->primary(['ref_id', 'version']);
 });
 
 ...
@@ -90,7 +92,7 @@ By default the query builder will fetch the latest version (e. g. `User::find(1)
 
 * `allVersions()` returns all versions of the queried items<br>Example: `User::allVersions()->get()` will return all versions of all users
 
-* `moment(Carbon)` returns a specific version, closest but lower than the input date<br>Example: `User::moment(Carbon::now()->subWeek()->find(1)` will return the version at that point in time.
+* `moment(Carbon)` returns a specific version, closest but lower than the input date<br>Example: `User::moment(Carbon::now()->subWeek())->find(1)` will return the version at that point in time.
 
 #### Create, update and delete records
 

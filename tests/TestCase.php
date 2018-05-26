@@ -2,7 +2,6 @@
 
 namespace ProAI\Versioning\Tests;
 
-use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase

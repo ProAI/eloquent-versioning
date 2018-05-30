@@ -166,7 +166,10 @@ trait BuilderTrait
     public function forceDelete()
     {
         // get records
-        $affectedRecords = $this->getAffectedRecords()->toArray();
+        $affectedRecords = $this->getAffectedRecords();
+        if (!is_array($affectedRecords))
+          $affectedRecords = $affectedRecords->toArray();
+        
         $ids = array_map(function($record) {
             return $record->{$this->model->getKeyName()};
         }, $affectedRecords);

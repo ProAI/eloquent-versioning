@@ -122,7 +122,7 @@ trait BuilderTrait
         foreach ($affectedRecords as $record) {
             // get versioned values from record
             foreach($this->model->getVersionedAttributeNames() as $key) {
-                $recordVersionValues[$key] = (isset($versionValues[$key])) ? $versionValues[$key] : $record->{$key};
+                $recordVersionValues[$key] = (isset($versionValues[$key])) ? $versionValues[$key] : array_get($record->getAttributes(), $key);
             }
 
             // merge versioned values from record and input
